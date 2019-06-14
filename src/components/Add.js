@@ -24,8 +24,10 @@ class AddForm extends React.Component{
         }
         this.props.add(payInfo)
         console.log(payInfo);
+        this.props.form.resetFields();
       }
     })
+
   }
   render() {
     const { getFieldDecorator } = this.props.form;

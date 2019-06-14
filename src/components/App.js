@@ -9,12 +9,14 @@ class App extends React.Component{
     super(props);
     this.state={
       payList:[{
+        key:'1',
         payTime: '2019-5-30',
         payMoney: '550',
         payType: 'eat',
         payContent: '生日聚会'
       },
         {
+          key:'2',
           payTime: '2019-5-31',
           payMoney: '230',
           payType: 'shopping',
@@ -25,6 +27,7 @@ class App extends React.Component{
   }
   add = (payInfo) => {
     let {payList} = this.state
+    payInfo.key = (payList.length + 1).toString()
     payList.push(payInfo)
     this.setState(payList)
   }
@@ -38,7 +41,7 @@ class App extends React.Component{
         </div>
         <Row>
           <Col span={12}>
-            <Charts/>
+            <Charts payList={payList}/>
           </Col>
           <Col span={12}>
             <List payList={payList} add={this.add}/>

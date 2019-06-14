@@ -11,8 +11,40 @@ class Charts extends React.Component{
 
     }
   }
-
-  componentDidMount() {
+   artUpdate() {
+    let {payList} = this.props
+    console.log(payList)
+    var data=[{
+      name: 'eat',
+      y: 0
+    }, {
+      name: 'shopping',
+      y: 0
+    }, {
+      name: 'travel',
+      y: 0
+    }, {
+      name: 'game',
+      y: 0
+    }, {
+      name: 'else',
+      y: 0
+    }]
+    for (let i = 0; i < payList.length; i++){
+      switch (payList[i].payType) {
+        case 'eat':data[0].y+=payList[i].payMoney * 1
+          break
+        case 'shopping': data[1].y+=payList[i].payMoney  * 1
+          break
+        case 'travel': data[2].y+=payList[i].payMoney  * 1
+          break
+        case 'game': data[3].y+=payList[i].payMoney  * 1
+          break
+        case 'else': data[4].y+=payList[i].payMoney  * 1
+          break
+        default :console.log('..')
+      }
+    }
     Highcharts.chart(this.refs.alarmHighChart, {
       chart: {
         plotBackgroundColor: null,
@@ -52,42 +84,20 @@ class Charts extends React.Component{
       series: [{
         name: 'Brands',
         colorByPoint: true,
-        data: [{
-          name: 'Chrome',
-          y: 61.41,
-          sliced: true,
-          selected: true
-        }, {
-          name: 'Internet Explorer',
-          y: 11.84
-        }, {
-          name: 'Firefox',
-          y: 10.85
-        }, {
-          name: 'Edge',
-          y: 4.67
-        }, {
-          name: 'Safari',
-          y: 4.18
-        }, {
-          name: 'Sogou Explorer',
-          y: 1.64
-        }, {
-          name: 'Opera',
-          y: 1.6
-        }, {
-          name: 'QQ',
-          y: 1.2
-        }, {
-          name: 'Other',
-          y: 2.61
-        }]
+        data: data
       }]
     })
+  }
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.artUpdate()
+  }
+  componentDidMount(){
+    this.artUpdate()
   }
 
 
   render() {
+
     return (
       <div ref="alarmHighChart">
       </div>
